@@ -1,0 +1,29 @@
+.backgroundImage {
+    position: absolute;
+    height: 140dvh;
+    width: 100%;
+}
+.backgroundImage img {
+    object-fit: cover;
+}
+
+.introContainer {
+    margin-top: 35dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.introContainer h1 {
+    z-index: 1;
+    color: white;
+    font-size: 6vw;
+    text-transform: uppercase;
+}
+
+.introImage {
+    position: absolute;
+    width: 350px;
+    height: 475px;
+    filter:brightness(70%);
+}
