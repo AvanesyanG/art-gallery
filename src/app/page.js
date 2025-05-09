@@ -5,6 +5,8 @@ import Description from "@/components/Description/Desctiption";
 import Projects from "@/components/Projects/Projects";
 import Gallery from "@/components/Gallery/Gallery";
 import Zoom from "@/components/Zoom/Zoom";
+import FinalSection from "@/components/FinalSection/FinalSection";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
     const containerRef = useRef(null);
@@ -47,6 +49,12 @@ export default function Home() {
             <Projects/>
             <Gallery/>
             <Zoom/>
+            <FinalSection/>
+            <Footer/>
+
+
+
+
 
         </main>
     );

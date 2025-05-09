@@ -1,7 +1,13 @@
 body {
     background: rgba(0, 0, 0, 0.96);
     margin:0;
+    padding:0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
+
 /* Target the scrollbar itself */
 ::-webkit-scrollbar {
     width: 6px; /* Adjust the width of the scrollbar */

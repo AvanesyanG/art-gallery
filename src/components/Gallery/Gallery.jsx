@@ -36,7 +36,7 @@ export default function Gallery() {
 
 
     return (
-        <main >
+        <div >
             <div className={styles.spacer}></div>
             <div ref={container} className={styles.gallery}>
                 <Column images={[images[0],images[1],images[2]]} y={y} />
@@ -45,7 +45,7 @@ export default function Gallery() {
                 <Column images={[images[9],images[10],images[11]]} y={y4} />
             </div>
             <div className={styles.spacer}></div>
-        </main>
+        </div>
     )
 }
 
