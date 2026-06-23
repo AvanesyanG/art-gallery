@@ -1,55 +1,44 @@
 "use client";
-import Image from 'next/image';
+import { useRef } from "react";
+import Image from "next/image";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useGsapContext } from "@/hooks/useGsapContext";
 import styles from "./styles.module.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLayoutEffect,useRef} from "react";
-
 
 const Intro = () => {
-    const backgroundImage =useRef(null);
-    const introImage =useRef(null);
+    const sectionRef    = useRef(null);
+    const backgroundRef = useRef(null);
+    const imageRef      = useRef(null);
 
-    useLayoutEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const timeline = gsap.timeline({
+    useGsapContext(sectionRef, () => {
+        const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: document.documentElement,
-                start:0,
+                start: 0,
                 end: "+=500px",
                 scrub: true,
-            }
-        })
-        timeline
-            .from(backgroundImage.current, {clipPath:"inset(15%)"})
-            .to(introImage.current, {height: "200px"})
-    },[])
+            },
+        });
 
-
+        tl.from(backgroundRef.current, { clipPath: "inset(15%)" })
+          .to(imageRef.current, { height: "200px" });
+    });
 
     return (
-        <div  className={styles.intro}>
-            <div ref={backgroundImage}  className={styles.backgroundImage}>
-                <Image
-                    src={'/images/bg.png'}
-                    fill
-                    alt="background image"
-                />
+        <div ref={sectionRef} className={styles.intro}>
+            <div ref={backgroundRef} className={styles.backgroundImage}>
+                <Image src="/images/bg.png" fill alt="Gallery background" />
             </div>
             <div className={styles.introContainer}>
-                <div ref={introImage}
-                     data-scroll
-                    data-scroll-speed="0.8"  // Parallax strength, increase to exaggerate
+                <div
+                    ref={imageRef}
+                    data-scroll
+                    data-scroll-speed="0.8"
                     className={styles.introImage}
                 >
-                    <Image
-                        src={'/images/Black_Square.jpg'}
-                        fill
-                        alt="foreground parallax image"
-                    />
+                    <Image src="/images/Black_Square.jpg" fill alt="Black Square by Kazimir Malevich" />
                 </div>
-                <h1 data-scroll data-scroll-speed="0.4" >Animated Gallery</h1>
+                <h1 data-scroll data-scroll-speed="0.4">Animated Gallery</h1>
             </div>
         </div>
     );

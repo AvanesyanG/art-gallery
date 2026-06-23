@@ -1,44 +1,41 @@
+"use client";
+import { useRef } from "react";
+import { gsap } from "@/lib/gsap";
+import { useGsapContext } from "@/hooks/useGsapContext";
 import styles from "./styles.module.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLayoutEffect,useRef} from "react";
 
-export default function Description ()  {
-    const phrases = [
-        "Motion design.",
-        "UI animations.",
-        "Scroll interactions.",
-        "Creative development."
-    ];    return (
+const PHRASES = [
+    "Motion design.",
+    "UI animations.",
+    "Scroll interactions.",
+    "Creative development.",
+];
+
+export default function Description() {
+    return (
         <div className={styles.description}>
-            {
-                phrases.map((phrase,index)=> {
-                    return <AnimatedText key={index}>{phrase}</AnimatedText>
-                })
-
-            }
+            {PHRASES.map((phrase, i) => (
+                <AnimatedText key={i}>{phrase}</AnimatedText>
+            ))}
         </div>
     );
-};
+}
 
-function AnimatedText({children}){
-    const text = useRef(null);
-    useLayoutEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.from(text.current, {
+function AnimatedText({ children }) {
+    const textRef = useRef(null);
+
+    useGsapContext(textRef, () => {
+        gsap.from(textRef.current, {
+            x: -200,
+            opacity: 0,
             scrollTrigger: {
-                trigger:text.current,
+                trigger: textRef.current,
                 start: "0px bottom",
                 end: "bottom+=400px bottom",
                 scrub: true,
-
             },
-            left: "-200px",
-            opacity:0,
-        })
+        });
+    });
 
-    },[])
-    return (
-        <p ref={text}>{children}</p>
-    )
+    return <p ref={textRef}>{children}</p>;
 }

@@ -1,39 +1,36 @@
-'use client'
-import React from 'react';
-import gsap from 'gsap'
-import {useEffect, useRef} from "react";
+"use client";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "@/lib/gsap";
 
-export default function GsapMagnetic({children}) {
+export default function GsapMagnetic({ children }) {
     const ref = useRef(null);
 
     useEffect(() => {
-        const xTo = gsap.quickTo(ref.current, "x", {duration:1,ease: "elastic.out(1,0.3)"})
-        const yTo = gsap.quickTo(ref.current, "y", {duration:1,ease: "elastic.out(1,0.3)"})
+        const el = ref.current;
+        if (!el) return;
 
-        const mouseMove =(e) => {
-          const {clientX,clientY} = e;
-          const {width,height,left,top} = ref.current.getBoundingClientRect();
-          const x = clientX - (left + width / 2);
-          const y = clientY - (top + height / 2);
-          xTo(x);
-          yTo(y)
+        const xTo = gsap.quickTo(el, "x", { duration: 1, ease: "elastic.out(1,0.3)" });
+        const yTo = gsap.quickTo(el, "y", { duration: 1, ease: "elastic.out(1,0.3)" });
 
-      }
-      const mouseLeave = (e) => {
-          xTo(0);
-          yTo(0)
+        const onMouseMove = ({ clientX, clientY }) => {
+            const { width, height, left, top } = el.getBoundingClientRect();
+            xTo(clientX - (left + width / 2));
+            yTo(clientY - (top + height / 2));
+        };
 
-      }
+        const onMouseLeave = () => {
+            xTo(0);
+            yTo(0);
+        };
 
-      ref.current.addEventListener('mousemove',mouseMove)
-      ref.current.addEventListener('mouseleave',mouseLeave)
+        el.addEventListener("mousemove", onMouseMove);
+        el.addEventListener("mouseleave", onMouseLeave);
 
         return () => {
-            ref.current.removeEventListener('mousemove',mouseMove)
-            ref.current.removeEventListener('mouseleave',mouseLeave)
-        }
-    },[])
-    return (
-        React.cloneElement(children, {ref})
-    )
+            el.removeEventListener("mousemove", onMouseMove);
+            el.removeEventListener("mouseleave", onMouseLeave);
+        };
+    }, []);
+
+    return React.cloneElement(children, { ref });
 }

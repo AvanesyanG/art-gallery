@@ -1,0 +1,45 @@
+.textReveal {
+  min-height: 120vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10vw 8vw;
+  background: rgba(0, 0, 0, 0.96);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4vw;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.8vw;
+}
+
+.wordWrapper {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.word {
+  display: inline-block;
+  font-size: 10vw;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.attribution {
+  margin-top: 4vw;
+  font-size: 1.3vw;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
